@@ -14,7 +14,7 @@ void setup() {
   while (!Serial) {
 
   }
-  Serial.println("Move servos? (set angle in degrees");      
+  Serial.println("Move servos? (1-> move, 0-> stop)");      
 }
  
 void loop() {
