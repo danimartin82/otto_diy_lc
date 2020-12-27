@@ -65,12 +65,12 @@ void loop() {
       }
       case 'd':
       {
-        Otto.turn(4,2000, LEFT);
+        Otto.turn2(4,2000, LEFT);
         break;
       }  
       case 'f':
       {
-        Otto.turn(4,2000, RIGHT);
+        Otto.turn2(4,2000, RIGHT);
         break;
       }
       case 'g':
