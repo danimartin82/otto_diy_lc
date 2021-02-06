@@ -55,27 +55,27 @@ void loop() {
     {
       case 'a':
       {
-        Otto.walk(4,1000, FORWARD);
+        Otto.turn(4,1000, LEFT);
         break;
       }
       case 's':
       {
-        Otto.walk(4,1000, BACKWARD);
+        Otto.turn(4,1000, RIGHT);
         break;
       }
       case 'd':
       {
-        Otto.turn2(4,2000, LEFT);
+        Otto.jump(4,1000);
         break;
       }  
       case 'f':
       {
-        Otto.turn2(4,2000, RIGHT);
+        Otto.jitter(4,1000, 20);
         break;
       }
       case 'g':
       {
-        Otto.bend(1,1400,LEFT);
+        Otto.moonwalker(4,1000,20,LEFT);
         break;
       }
         case 'h':
@@ -94,6 +94,17 @@ void loop() {
       {
         Otto.sing(S_happy);
         delay(500);
+        Otto.sing(S_fart1);
+        delay(500);
+        Otto.sing(S_fart2);
+        delay(500);
+        Otto.sing(S_fart3);
+        delay(500);
+        Otto.sing(S_sad);
+        delay(500);
+        Otto.sing(S_confused);
+        
+        
         break;
       }
 

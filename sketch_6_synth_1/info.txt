@@ -1,0 +1,15 @@
+
+Articulos sobre como crear una dub_siren con 555s:
+https://jacoblysgaard.com/2009/08/dyi-dub-siren-%E2%80%93-the-complete-rubdown/
+
+https://www.instructables.com/Dub-Siren-555-Timer/
+
+
+Articulo para crear sintes con arduino
+https://create.arduino.cc/projecthub/michalin70/arduino-as-waveform-synthesizer-for-music-2aa48f?ref=tag&ref_id=synthesizer&offset=5
+
+Articulo PWM con arduino
+https://www.laboratoriogluon.com/generar-senal-pwm-para-servo-con-avr-atmega328p/
+
+Atmega328 datasheet
+https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
