@@ -54,6 +54,12 @@ void loop()
           case 6:
             update_duty(80);
             break;      
+         case 7:
+            Timer1.start();
+            break;      
+         case 8:
+            Timer1.stop();
+            break;      
 
                                    
         }
