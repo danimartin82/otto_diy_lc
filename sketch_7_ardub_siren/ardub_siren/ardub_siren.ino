@@ -2,11 +2,14 @@
 #include "TimerOne.h"
 #include <math.h>
 
-#define OSC1_DEBUG_PIN 3 // Debug pin with osc1
-#define OSC2_PWM_PIN   9 // output pin for the pwm
-#define INPUT_POT1_PIN 0 // input pot1
-#define INPUT_POT2_PIN 1 // input pot2
+#define OSC1_DEBUG_PIN   3 // Debug pin with osc1
+#define OSC2_PWM_PIN     9 // output pin for the pwm
+#define INPUT_POT1_PIN   0 // input pot1 -> R6 Freq OSC1
+#define INPUT_POT2_PIN   1 // input pot2 -> R3 Offset OSC1
+#define INPUT_POT3_PIN   2 // input pot3 -> R9 Freq OSC2
+#define INPUT_BUTTON_PIN 7 // input button
 
+#define ARDUB_SIREN_VERSION 1
 
 //********************************************
 // Main loop sleep
@@ -18,23 +21,30 @@ float sample_period = 0.1; // [s]
 //********************************************
 // INPUTS
 //********************************************
-uint16_t input1;
-uint16_t input2;
-
+uint16_t input_pot1;
+uint16_t input_pot2;
+uint16_t input_pot3;
+uint16_t input_button;
 
 
 
 //********************************************
 // Global functions
 //********************************************
+float fmap(float x, float x0, float x1, float y0, float y1);
+
+
 void read_inputs(void);
 
 void Osc2_setup(void);
 void Osc2_update_frequency (uint16_t freq);
 void Osc2_update_duty(uint16_t duty);
+void Osc2_update_inputs(float osc1_value, uint16_t input_pot_freq, uint16_t input_button);
+
 
 void Osc1_setup(void);
-void Osc1_main_function(void);
+float Osc1_main_function(void);
+void Osc1_update_inputs(uint16_t input_pot_freq, uint16_t input_pot_offset);
 void Osc1_update_freq(float freq);
 void Osc1_update_offset(float offset);
 
@@ -45,12 +55,15 @@ void Osc1_update_offset(float offset);
 void setup()
 {  
    Serial.begin(9600);           // Iniciar puerto serie
-   Serial.print("\nARDUB SIREN 1.0\n");
+   Serial.print("\nARDUB SIREN v");
+   Serial.println(ARDUB_SIREN_VERSION);
    Serial.print("*********************************\n\n");
    
    Osc1_setup();    
    Osc2_setup();            
-  
+
+   pinMode(INPUT_BUTTON_PIN, INPUT_PULLUP);
+   
 }
 //********************************************
 // loop
@@ -58,12 +71,13 @@ void setup()
 void loop() 
 {
 
-   //read_inputs();
+   read_inputs();
 
-   Osc1_update_inputs();
-   Osc1_main_function();
+   Osc1_update_inputs(input_pot1,input_pot2);
+   
+   float Osc1_output = Osc1_main_function();
 
-   Osc2_update_inputs();
+   Osc2_update_inputs(Osc1_output,input_pot3,input_button);
    
    delay(sample_period*1000);
 }
@@ -76,40 +90,35 @@ void loop()
 void read_inputs(void)
 {
    uint16_t aux= analogRead(INPUT_POT1_PIN);
-   if(aux != input1)
+   if(aux != input_pot1)
    {
-      input1=aux;
+      input_pot1=aux;
       Serial.print("INPUT_POT1_PIN = ");
-      Serial.println(input1); 
+      Serial.println(input_pot1); 
    }
    aux = analogRead(INPUT_POT2_PIN);
-   if(aux != input2)
+   if(aux != input_pot2)
    {
-      input2=aux;
+      input_pot2=aux;
       Serial.print("INPUT_POT2_PIN = ");
-      Serial.println(input2); 
+      Serial.println(input_pot2); 
+   }
+   aux = analogRead(INPUT_POT3_PIN);
+   if(aux != input_pot3)
+   {
+      input_pot3=aux;
+      Serial.print("INPUT_POT3_PIN = ");
+      Serial.println(input_pot3); 
    }
 
-}
-//********************************************
-// Osc1_update_inputs
-//********************************************
-void Osc1_update_inputs(uint16_t freq, uint16_t offset)
-{
-
-
-
+    input_button = digitalRead(INPUT_BUTTON_PIN);
 }
 
+
 //********************************************
-// Osc2_update_inputs
+// Map (float version) gets y corresponding to x.
 //********************************************
-void Osc2_update_inputs(float osc1_value)
+float fmap(float x, float x0, float x1, float y0, float y1)
 {
-  uint16_t factor =(uint16_t )osc1_value;
-
-  Osc2_freq = osc1_value * Osc2_freq;
-  Osc2_duty =  * Osc2_duty;
-
-
+  return (y0*(x1-x)+y1*(x-x0))/(x1-x0);
 }

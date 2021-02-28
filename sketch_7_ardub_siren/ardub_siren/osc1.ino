@@ -13,9 +13,9 @@ float aplied_offset;
 float Osc1_amplitude;
 
 float t = 0;
-float value = 0;
-float final_value = 0;
-bool check = false;
+float Osc1_output = 0;
+float Osc1_semiperiod_value = 0;
+bool  Osc1_semiperiod_check = false;
 
 
 
@@ -54,32 +54,34 @@ void Osc1_setup(void)
 //********************************************
 // Osc1_main_function
 //********************************************
-void Osc1_main_function(void)
+float Osc1_main_function(void)
 {
  t= t + sample_period;
   if (t < semiperiod_1)
   {
-    value = Osc1_amplitude* exp(-t/tau);
+    Osc1_output = Osc1_amplitude* exp(-t/tau);
   }
   if (t >= semiperiod_1)
   {
-    if (check == false)
+    if (Osc1_semiperiod_check == false)
     {
-      final_value = Osc1_amplitude* exp(-t/tau) + aplied_offset;
-      check = true;
+      Osc1_semiperiod_value = Osc1_amplitude* exp(-t/tau) + aplied_offset;
+      Osc1_semiperiod_check = true;
     }
   }
   if (t > semiperiod_1)
   {
-    value = final_value + Osc1_amplitude*(1- exp(-(t-semiperiod_1)/tau));
+    Osc1_output = Osc1_semiperiod_value + Osc1_amplitude*(1- exp(-(t-semiperiod_1)/tau));
   }
   if (t >= period_1)
   { 
     t = 0;
-    check = false;
+    Osc1_semiperiod_check = false;
   }    
- // Serial.println(value);
-  analogWrite(OSC1_DEBUG_PIN,value);
+ // Serial.println(Osc1_output);
+  analogWrite(OSC1_DEBUG_PIN,Osc1_output);
+
+  return Osc1_output;
 }
 
 
@@ -112,7 +114,6 @@ void Osc1_update_offset(float offset)
 //********************************************
 float Osc1_interpolate_f(float freq)
 {
-  float x, x0,x1,y0,y1;
   
   if (freq < freqs[0])
   {
@@ -136,16 +137,41 @@ float Osc1_interpolate_f(float freq)
 
         if  ((freq > freqs[i]) && (freq < freqs[i+1]))
         {
-          y0=ks[i];
-          y1=ks[i+1];
-          x0=freqs[i];
-          x1=freqs[i+1];         
-          x=freq;
-          k = (y0*(x1-x)+y1*(x-x0))/(x1-x0);
+          k= fmap(freq, freqs[i], freqs[i+1], ks[i], ks[i+1]);
         }
       }
     }
   }
 
   return k;
+}
+
+
+//********************************************
+// Osc1_update_inputs
+//********************************************
+void Osc1_update_inputs(uint16_t input_pot_freq, uint16_t input_pot_offset)
+{
+    // Map input input_pot_freq from [0-1023] to [0.1-5] Hz
+    float new_freq = fmap(input_pot_freq, 0, 1023, 0.1, 5);
+    
+    // Map input osc1_value from [0-1023] to [0.9-1.1]
+    float new_offset = fmap(input_pot_offset, 0, 1023,0, 50);
+
+    Osc1_update_offset(new_offset);
+    Osc1_update_freq(new_freq);
+
+/*  Serial.print("osc1_value=");
+  Serial.print(osc1_value);
+  Serial.print(", factor=");
+  Serial.print(factor);
+  Serial.print(", new_freq=");
+  Serial.print(new_freq);
+  Serial.print(", new_duty=");
+  Serial.print(new_duty);
+  Serial.print("\n");
+*/
+  
+
+
 }
