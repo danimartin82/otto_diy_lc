@@ -105,7 +105,7 @@ float Osc1_main_function(void)
     t = 0;
   }    
   analogWrite(OSC1_DEBUG_PIN,Osc1_output);
-  Serial.println(Osc1_output);
+ //Serial.println(Osc1_output);
   return Osc1_output;
 }
 

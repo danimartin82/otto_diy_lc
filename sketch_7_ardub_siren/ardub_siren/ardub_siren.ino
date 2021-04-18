@@ -3,9 +3,9 @@
 
 #define OSC1_DEBUG_PIN   3 // Debug pin with osc1
 #define OSC2_PWM_PIN     9 // output pin for the pwm
-#define INPUT_POT1_PIN   0 // input pot1 -> R6 Freq OSC1
-#define INPUT_POT2_PIN   1 // input pot2 -> R3 Offset OSC1
-#define INPUT_POT3_PIN   2 // input pot3 -> R9 Freq OSC2
+#define INPUT_POT1_PIN   1 // input pot1 -> R6 Freq OSC1
+#define INPUT_POT2_PIN   2 // input pot2 -> R3 Offset OSC1
+#define INPUT_POT3_PIN   3 // input pot3 -> R9 Freq OSC2
 #define INPUT_BUTTON_PIN 2 // input button
 
 #define ARDUB_SIREN_VERSION 1
@@ -92,8 +92,8 @@ void read_inputs(void)
    if(aux != input_pot1)
    {
       input_pot1=aux;
-    //  Serial.print("INPUT_POT1_PIN = ");
-    //  Serial.println(input_pot1); 
+     // Serial.print("INPUT_POT1_PIN = ");
+     //d Serial.println(input_pot1); 
    }
    aux = analogRead(INPUT_POT2_PIN);
    if(aux != input_pot2)
@@ -106,11 +106,12 @@ void read_inputs(void)
    if(aux != input_pot3)
    {
       input_pot3=aux;
-    //  Serial.print("INPUT_POT3_PIN = ");
-    //  Serial.println(input_pot3); 
+      //Serial.print("INPUT_POT3_PIN = ");
+      //Serial.println(input_pot3); 
    }
 
     input_button = digitalRead(INPUT_BUTTON_PIN);
+
 }
 
 

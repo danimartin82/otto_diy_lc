@@ -4,9 +4,9 @@
   <c> CAUTION: DO NOT MODIFY THIS FILE !!! </c>
   <c>     ...if you don't know how...      </c>
   <c>======================================</c>
-  <Version ver="2" rev="7" build="3" date="07/29/2020" ID="1775803820" />
+  <Version ver="2" rev="7" build="3" date="07/29/2020" ID="501930924" />
   <Doc display="3" activeSheet="0">
-    <Properties title="No+title" revision="1.0" author="Unknown" project="Unknown" organization="Unknown" comments="" created="3%2f23%2f2009+5%3a35%3a15+PM" modified="21%2f02%2f2021+20%3a40%3a31" save="0" />
+    <Properties title="No+title" revision="1.0" author="Unknown" project="Unknown" organization="Unknown" comments="" created="3%2f23%2f2009+5%3a35%3a15+PM" modified="10%2f03%2f2021+19%3a37%3a53" save="0" />
     <CirWin state="0" l="0" t="0" w="1125" h="380" />
     <Cmps Options="2" Key="1C78A5D4FF1C0D9956D49CFBE3ED9064">
       <Cmp type="C_C" id="24" name="C1" file_name="" view="0" node0="0" node1="1" model="C" ic="" c="220e-6" fs="1%2fs" />
@@ -55,7 +55,7 @@
     </Cmps>
     <Sheet name="Sheet1">
       <VC size="17" center="21,-5" />
-      <Curs p="55,-2" dir="-1" />
+      <Curs p="15,-2" dir="-1" />
       <Pcts>
         <Pct type="label" undo_id="1" id="19" p="30,-12" text0="16,-24" text1="30,8" textdir="0" />
         <Pct type="label" undo_id="2" id="19" p="-10,-11" text0="16,-24" text1="30,8" textdir="0" />
@@ -225,7 +225,7 @@
     </Sheet>
     <Calc zero="10e-12" kmin="100e-3" nsr="false" ndo="false" os="false" timeout="0" low="0" high="5" thr="2.5" zparam="" />
     <Tran storage="2" last="false" storage_shift="true">
-      <Cursors enabled="false" locked="false" interval="false" left="4.921875" right="5.078125" active="true" />
+      <Cursors enabled="false" locked="false" interval="false" left="2.5" right="7.5" active="true" />
       <Table enabled="true" tran_table="false" time_table="true" time_header="false" vars="2047">
         <Width w0="4" w1="4" w2="4" w3="4" w4="4" w5="4" w6="4" w7="4" w8="4" w9="4" w10="4" w11="4" w12="4" />
         <TranTable l="0" t="0" w="0" h="0" usetran="false" seltraces="false" />
@@ -233,13 +233,12 @@
       <TranWin data_points="false" digital_labels="true" numbers="true" preview="false" preview_size="40" digital="false" digital_ratio="500e-3" split="false" legend="true" legend_x="1" legend_y="0" horgrid="true" vertgrid="true" vertscale="false" status_panels="7" phase="0" phase_y="600e-3" state="2" table_height="147" />
       <Settings start="0" screen="10" step="10e-3" dispstep="1e-3" savebeforestart="true" sampling="0" rununtil="false" rununtilf="" />
       <Annotations />
-      <Scale start="4.921875" screen="156.25e-3" scale="330.177815864e-3" mid="-1" />
-      <Traces activeTrace="2">
-        <Trace type="0" id="42" color="255,255,0" mode="0" name="V(V1)" tracename="" expr="V(V1)" dig_threshold="2.5" lines="true" data_points="false" bus_format="2" bus_bits="0" bus_content="false" bus_fp="0" bus_text="" scale="10" mid="0" scale_history="" shift="0" width="1" phwidth="1" plot="true" table="true" storage="true" tool="0" xy="false" out1="0" />
+      <Scale start="2.5" screen="5" scale="330.177815864e-3" mid="-1" />
+      <Traces activeTrace="1">
         <Trace type="0" id="62" color="0,255,0" mode="0" name="V(Label3)" tracename="" expr="V(Label3)" dig_threshold="2.5" lines="true" data_points="false" bus_format="2" bus_bits="0" bus_content="false" bus_fp="0" bus_text="" scale="10" mid="0" scale_history="" shift="0" width="1" phwidth="1" plot="true" table="true" storage="true" tool="0" xy="false" out1="0" />
-        <Trace type="0" id="59" color="0,255,255" mode="0" name="V(Vout)" tracename="" expr="V(Vout)" dig_threshold="2.5" lines="true" data_points="false" bus_format="2" bus_bits="0" bus_content="false" bus_fp="0" bus_text="" scale="10" mid="0" scale_history="" shift="0" width="1" phwidth="1" plot="true" table="true" storage="true" tool="0" xy="false" out1="0" />
+        <Trace type="0" id="42" color="0,255,255" mode="0" name="V(V1)" tracename="" expr="V(V1)" dig_threshold="2.5" lines="true" data_points="false" bus_format="2" bus_bits="0" bus_content="false" bus_fp="0" bus_text="" scale="10" mid="0" scale_history="" shift="0" width="1" phwidth="1" plot="true" table="true" storage="true" tool="0" xy="false" out1="0" />
       </Traces>
-      <Log>Transient+log%0aStarted+%3a+21%2f02%2f2021+20%3a40%3a32%0aFile+%3a+C%3a%5cUsers%5cDaniel%5cDocuments%5cNL5%5cdub_siren%5cdub_siren%5cdub_siren.nl5%0aStopped+%3a+21%2f02%2f2021+20%3a40%3a32%0aS3+%3a+Floating+pin%0a%0a0+%3a+Init%0aComponents+%3d+73%0aNodes+%3d+34%0aRank+%3d+59%0aStopped+%3a+21%2f02%2f2021+21%3a28%3a46</Log>
+      <Log>Transient+log%0aStarted+%3a+10%2f03%2f2021+19%3a37%3a54%0aFile+%3a+C%3a%5cUsers%5cDaniel%5cDesktop%5cthe+digitial+kiwi+company%5ccode%5cthedigitalkiwi%5cardub_siren_extras%5cdub_siren_nl5%5cdub_siren.nl5%0aStopped+%3a+10%2f03%2f2021+19%3a37%3a54%0aS3+%3a+Floating+pin%0a%0a0+%3a+Init%0aComponents+%3d+73%0aNodes+%3d+34%0aRank+%3d+59%0aStopped+%3a+11%2f03%2f2021+20%3a17%3a30</Log>
     </Tran>
     <Freq storage="1" last="false" storage_shift="true">
       <Cursors enabled="true" locked="false" interval="false" left="100" right="10e+3" active="true" />
