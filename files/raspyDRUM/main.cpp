@@ -47,7 +47,7 @@ int main() {
 
     uint16_t chan = 0;
 
-    for (int i=0; i < 20; i++)
+    for (;;)
     {
         float   x = analogRead (BASE + chan);
         printf("Channel %d: %f\n", chan, x);     
