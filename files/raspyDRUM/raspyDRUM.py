@@ -46,6 +46,7 @@ s5= pygame.mixer.Sound('audio/14-Cartoon-sound-effect.wav')
 s6= pygame.mixer.Sound('audio/15-Cartoon-sound-effect.wav')
 s7= pygame.mixer.Sound('audio/21-Cartoon-sound-effect.wav')
 s8= pygame.mixer.Sound('audio/50-Cartoon-sound-effect.wav')
+sounds=[s1,s2,s3,s4,s5,s6,s7,s8]
 
 volumes=[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0]
 
@@ -60,8 +61,8 @@ print('-' * 57)
 
 
 # Main program loop.
-prev   = 0
-actual = 0
+values = [0]*8
+prev   = [0]*8
 
 
 ##########################################################################################################
@@ -70,24 +71,28 @@ actual = 0
 
 while True:
     # Read all the ADC channel values in a list.
-    values = [0]*8
+
     for i in range(8):
         # The read_adc function will get the value of the specified channel (0-7).
         values[i] = mcp.read_adc(i)
+
+    #for i in range(8):
+     
+        if (values[i] > 150) and (prev[i] < 150):
+            print(f"\nPLAY ch {i}\n")
+            pygame.mixer.Sound.play(sounds[i])
+            #while pygame.mixer.get_busy() == True:
+            #    time.sleep(0.1)
+
+        prev[i] = values[i]         
+   
     # Print the ADC values.
     print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
-    
+         
 
     # Pause for half a second.
     time.sleep(0.5)
-    actual = values[0]
-    if (actual>150) and (prev <150):
-        print("PLAY\n")
-        pygame.mixer.Sound.play(s1)
-        while pygame.mixer.get_busy() == True:
-            time.sleep(0.1)
-
-    prev = actual         
-
+        
+    #led control
     GPIO.output(led, led_state)
     led_state = GPIO.HIGH - led_state
