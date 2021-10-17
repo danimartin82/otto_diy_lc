@@ -278,7 +278,7 @@ class OLED:
 	#********************************************************************************/
 	def OLED_Clear(self):
 		for i in range(0, self.OLED_Dis_Page):
-			for m in range(0, self.OLED_Dis_Column / 2):				
+			for m in range(0, self.OLED_Dis_Column):				
 				self.OLED_WriteData(0X00)				
 	
 	def OLED_ShowImage(self, Image, Xstart, Ystart):

@@ -24,7 +24,8 @@
  # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  # THE SOFTWARE.
  #
- 
+from datetime import datetime
+import time
 import DEV_Config
 import OLED_Driver
 from PIL import Image,ImageDraw,ImageFont
@@ -39,29 +40,37 @@ def main():
 
     #OLED.OLED_Clear()
     DEV_Config.Driver_Delay_ms(20)
-    image = Image.new("L", (OLED.OLED_Dis_Column, OLED.OLED_Dis_Page), 0)# grayscale (luminance)
-    draw = ImageDraw.Draw(image)
-    #font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf', "White")
-
-    print ("***draw line")
-    draw.line([(0,0),(127,0)], fill = "White",width = 1)
-    draw.line([(127,0),(127,60)], fill = "White",width = 1)
-    draw.line([(127,60),(0,60)], fill = "White",width = 1)
-    draw.line([(0,60),(0,0)], fill = "White",width = 1)
-    print ("***draw rectangle")
-    draw.rectangle([(18,10),(110,20)],fill = "White")
-
-    print ("***draw text")
-    draw.text((33, 22), 'HOLA  ', fill = "White")
-    draw.text((32, 36), 'CARACOLA', fill = "White")
-    draw.text((28, 48), 'DRITTOOOO ', fill = "White")
-        
-    OLED.OLED_ShowImage(image,0,0)
-    DEV_Config.Driver_Delay_ms(2000)
-
+    font_size = 20
+    font = ImageFont.truetype("arial.ttf", size=font_size)
+   
     image = Image.open('raspyDRUM_init.bmp')#this pis is small ,Will trigger an exception,but you can show
     OLED.OLED_ShowImage(image,0,0)
-  #  print(image.format) 
+
+    DEV_Config.Driver_Delay_ms(2000)
+
+    image = Image.new("L", (OLED.OLED_Dis_Column, OLED.OLED_Dis_Page), 0)# grayscale (luminance)
+    draw = ImageDraw.Draw(image)
+
+    while (True):
+    
+        #OLED.OLED_Clear()
+        draw.rectangle([(0,0),(127,127)],fill = "Black")
+
+        now = datetime.now()
+
+        current_time = now.strftime("%H:%M:%S")
+        print("Current Time =", current_time)
+
+
+        draw.line([(0,40),(127,40)], fill = "White",width = 1)
+        draw.line([(127,40),(127,100)], fill = "White",width = 1)
+        draw.line([(127,100),(0,100)], fill = "White",width = 1)
+        draw.line([(0,100),(0,40)], fill = "White",width = 1)
+
+        draw.text((25, 62), current_time, fill = "White", font = font)
+  
+        OLED.OLED_ShowImage(image,0,0)
+        
 
 
 if __name__ == '__main__':
